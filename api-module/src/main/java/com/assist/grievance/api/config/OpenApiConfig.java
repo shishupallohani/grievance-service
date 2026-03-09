@@ -1,5 +1,6 @@
 package com.assist.grievance.api.config;
 
+import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.License;
@@ -34,8 +35,10 @@ public class OpenApiConfig {
         }).collect(Collectors.toList());
 
         return new OpenAPI()
-                .info(new Info().title("Grievance Module API").description("This is Rest api for Grievance Module")
-                        .version("v0.0.1").license(new License().name("HITPA")))
+                .info(new Info().title("Grievance Service API").description("Grievance workflow APIs")
+                        .version("v0.0.1")
+                        .license(new License().name("SHISHUPAL LOHANI"))
+                        .contact(new Contact().email("shishupallohani26@gmail.com")))
                 .servers(servers);
 
 
