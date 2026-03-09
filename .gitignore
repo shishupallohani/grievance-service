@@ -1,0 +1,17 @@
+/.idea
+/.mvn
+/target
+**/target
+*.log
+*.class
+.classpath
+.project
+.settings
+.factorypath
+/.settings
+/.springBeans
+.DS_Store
+/.env
+**/.env
+**/.env.*
+qodana.yaml

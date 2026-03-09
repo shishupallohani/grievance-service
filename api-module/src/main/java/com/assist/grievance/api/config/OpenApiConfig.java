@@ -1,0 +1,43 @@
+package com.assist.grievance.api.config;
+
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.License;
+import io.swagger.v3.oas.models.servers.Server;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Configuration
+public class OpenApiConfig {
+
+    @Value("${openapi.servers}")
+    private String serverUrls;
+
+    @Value("${openapi.server.description}")
+    private String serverDescriptions;
+
+    @Bean
+    public OpenAPI productServiceAPI() {
+
+        List<String> urlList = Arrays.asList(serverUrls.split(","));
+        List<String> descList = Arrays.asList(serverDescriptions.split(","));
+
+        List<Server> servers = urlList.stream().map(url -> {
+            int index = urlList.indexOf(url);
+            String description = index < descList.size() ? descList.get(index) : "Default Server";
+            return new Server().url(url).description(description);
+        }).collect(Collectors.toList());
+
+        return new OpenAPI()
+                .info(new Info().title("Grievance Module API").description("This is Rest api for Grievance Module")
+                        .version("v0.0.1").license(new License().name("HITPA")))
+                .servers(servers);
+
+
+    }
+}
