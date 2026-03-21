@@ -9,6 +9,7 @@ import com.assist.grievance.data.model.request.GrievanceRequestDto;
 import com.assist.grievance.service.GrievanceExportService;
 import com.assist.grievance.service.GrievanceService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -57,6 +58,7 @@ public class GrievanceController {
 
 
     @GetMapping("/paginated-search")
+    @SecurityRequirement(name = "basicAuth")
     @Operation(summary = "Search Grievances with Pagination", description = "This endpoint allows searching for Grievances with pagination support based on the provided search criteria.")
     public ResponseEntity<SearchResponseData<GrievanceRequestDto>> searchGrievances(@Valid @ModelAttribute GrievancePaginatedRequest searchRequest) {
         log.info("Inside GrievanceController >> searchGrievances");
