@@ -29,8 +29,8 @@ RUN apt-get update && apt-get install -y \
 # Copy the final jar from main module
 COPY --from=builder /app/main-app/target/*.jar /app/app.jar
 
-# Copy environment file
-COPY .env /app/.env
+# Copy environment file (optional - won't fail if .env doesn't exist)
+COPY .env* /app/
 
 EXPOSE 8080
 
